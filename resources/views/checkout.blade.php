@@ -57,7 +57,7 @@
       
         ?>
      
-      @foreach(session('cart') as $key => $value)
+      @foreach(session('carts') as $key => $value)
 
       <?php
       

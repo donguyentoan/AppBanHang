@@ -22,7 +22,10 @@
                         <h5 class="title_center">ĐẶT HÀNG THÀNH CÔNG</h5>
                      
                         
+                        <?php 
+                        $total = 0 ;
                         
+                        ?>
                        
                          <div  class="product-widget">
                                 @foreach(session('carts') as $key => $value)
@@ -38,12 +41,24 @@
                                         
                                             
                                  </div>
+
+                                 <?php  $total = ($value['price'] * $value['quantity']) ;
+                                 session()->put('key', $total);
+                                 ?>
+
+                                   
+                                
                       
                             @endforeach
-                            <h3>Tổng Tiền :  234324$</h3>
+
+                            
+                            <h3>Tổng Tiền :  {{$total}}</h3>
+
+                            
 
                               <div class="buttom_submit">
                                 <button class="ktra" type="submit"> <a href="/addtocart">Kiểm Tra Đơn Hàng </a> </button>
+                                <button class="ktra"  type="submit"> <a href="/payment">Thanh Toán VNPay </a> </button>
                                 <button class="tieptuc" type="submit"> <a href="/">Tiếp Tục Mua Hàng</a>  </button>
                             </div>
 

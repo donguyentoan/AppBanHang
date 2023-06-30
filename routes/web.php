@@ -6,8 +6,10 @@ use App\Http\Controllers\homeController;
 
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\adminController;
-use App\Http\Controllers\coffeController;
+use App\Http\Controllers\CoffeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TopupController;
+use App\Http\Controllers\paymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\checkoutController;
 use App\Http\Controllers\RegisterController;
@@ -39,14 +41,14 @@ Route::get('/deletecart/{id}', [addtocartController::class, 'deleteProductToCart
 Route::get('/checkout' , [checkoutController::class , 'index']);
 
 
-Route::get('/coffees', [coffeController::class , 'index']);
+Route::get('/coffees', [CoffeController::class , 'index']);
 
 Route::get('/register', function () {
     return view('register');
 })->name('register');
 
 Route::post('/register', [RegisterController::class , 'register']);
-   
+
 Route::get('/login', function () { return view('login');})->name('login');
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -58,7 +60,7 @@ Route::resource('dashboard/products' , AdminProductController::class);
 Route::get('/oder' , [oder_adminController::class , 'index']);
 
 Route::get('/' , [homeController::class, 'index'])->middleware('auth');
-        
+
 
 
 Route::get('/about', function () {
@@ -74,10 +76,16 @@ Route::get('/contact', function () {
 });
 
 
-
-
 Route::get('/order' , [OrderController::class, 'index']);
+Route::get('/topup' , [TopupController::class , 'index']);
+Route::post('/topup/plus' , [TopupController::class , 'wallet_transaction']);
+Route::post('/topup/withdraw' , [TopupController::class , 'wallet_transaction_withdraw']);
 
 
 
 
+
+
+Route::get('/api/wallet' , [TopupController::class , 'createWallet']);
+Route::get('/payment' , [paymentController::class , 'index'] );
+Route::post('/vnpay_create_payment' , [paymentController::class , 'index1'] );

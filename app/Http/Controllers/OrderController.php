@@ -13,73 +13,37 @@ class OrderController extends Controller
     public function index()
     {
 
-
-      
-        
         $order = new Order();
-       
+
         $user = session('user');
-       $cart = Session::get('carts');
+        $cart = Session::get('carts');
 
-      
 
-        
         $order->customer_id = $user->id;
         $order->order_date = date('Y-m-d');
 
-        foreach($cart as $sp)
-         {
-          
+        foreach ($cart as $sp) {
+
             $total = $sp['price'] * $sp['quantity'];
-         $order->total_amount += $total;
-          
-         }
-        
+            $order->total_amount += $total;
 
-         $order->save();
+        }
 
+        $order->save();
 
-        
-
-
-        
-
-         
-
-         foreach($cart as $sp)
-         {
-            $orderDetail = new OrderDetail(); 
+        foreach ($cart as $sp) {
+            $orderDetail = new OrderDetail();
             $orderDetail->order_id = $order->id;
             $orderDetail->product_id = $sp['id'];
             $orderDetail->quantity = $sp['quantity'];
             $orderDetail->save();
 
-         }
+        }
 
 
 
+        return view('checkout_ss');
 
-       
-        
-
-
-
-
-    
-        
-    
-        //  foreach($product as $sp)
-        //  {
-          
-        //     $order->user_id = $user->id;
-        //     $order->order_number = $sp['name'];
-        //     $order->save();
-          
-        //  }
-        
-
-         return view('checkout_ss');
-       
         //
     }
 }

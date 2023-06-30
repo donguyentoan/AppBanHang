@@ -30,4 +30,14 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'vnpay' => [
+        'driver' => 'VnPay',
+        'options' => [
+            'vnp_TmnCode' => 'J8HGGW9C',
+            'vnp_HashSecret' => 'FCJXJWUHAZEJIGSYUALUZYMLKAGLXNIW',
+            'vnp_ReturnUrl' => 'http://localhost:10078/',
+            // Thêm các thông tin khác cần thiết
+        ],
+    ],
+
 ];
